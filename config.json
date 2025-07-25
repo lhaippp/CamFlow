@@ -1,0 +1,56 @@
+{
+  "title": "[ICCV25] Estimating 2D Camera Motion with Hybrid Motion Basis",
+  "conference": "ICCV 2025",
+  "authors": [
+    {
+      "name": "Author Name",
+      "affiliation": 1,
+      "email": "author@university.edu",
+      "website": "https://authorwebsite.com"
+    },
+    {
+      "name": "Co-author Name", 
+      "affiliation": 1,
+      "email": "coauthor@university.edu"
+    },
+    {
+      "name": "Another Author",
+      "affiliation": 2,
+      "email": "another@institution.edu"
+    }
+  ],
+  "affiliations": [
+    "University/Institution Name",
+    "Another Institution"
+  ],
+  "links": {
+    "paper": "#",
+    "code": "https://github.com/lhaippp/CamFlow",
+    "video": "#",
+    "data": "#",
+    "poster": "#",
+    "arxiv": "#"
+  },
+  "abstract": "We present a novel approach for estimating 2D camera motion using hybrid motion basis. Camera motion estimation is a fundamental problem in computer vision with applications ranging from autonomous driving to augmented reality. Traditional methods often struggle with complex motion patterns and varying scene conditions. Our hybrid motion basis framework combines the strengths of both parametric and non-parametric motion models to achieve robust and accurate camera motion estimation. We introduce a novel representation that adaptively selects the most appropriate motion basis for different regions of the image, leading to improved accuracy and robustness. Extensive experiments on standard benchmarks demonstrate that our method outperforms state-of-the-art approaches while maintaining computational efficiency.",
+  "keywords": [
+    "Camera Motion Estimation",
+    "Computer Vision", 
+    "Hybrid Motion Basis",
+    "2D Motion Analysis",
+    "Robust Estimation"
+  ],
+  "citation": {
+    "bibtex": "@inproceedings{author2025estimating,\n    title={Estimating 2D Camera Motion with Hybrid Motion Basis},\n    author={Author, Name and Co-author, Name and Another, Author},\n    booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},\n    pages={xxxx--xxxx},\n    year={2025}\n}",
+    "apa": "Author, N., Co-author, N., & Another, A. (2025). Estimating 2D Camera Motion with Hybrid Motion Basis. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. xxxx-xxxx)."
+  },
+  "social": {
+    "github": "https://github.com/lhaippp/CamFlow",
+    "twitter": "#",
+    "linkedin": "#"
+  },
+  "theme": {
+    "primaryColor": "#667eea",
+    "secondaryColor": "#764ba2",
+    "accentColor": "#2c3e50"
+  }
+}

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ICCV25] Estimating 2D Camera Motion with Hybrid Motion Basis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .conference-tag {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .authors {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .affiliation {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .nav-buttons {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        main {
+            padding: 60px 0;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .abstract-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .abstract-box p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .method-overview {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .method-diagram {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: linear-gradient(45deg, #f0f2f5, #e1e8ed);
+            border-radius: 10px;
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+            border: 2px dashed #ccc;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .result-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .result-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .result-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            border: 1px dashed #dee2e6;
+        }
+
+        .citation-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="conference-tag">ICCV 2025</div>
+            <h1>Estimating 2D Camera Motion with Hybrid Motion Basis</h1>
+            <div class="authors">
+                <strong>Author Name</strong><sup>1</sup>, 
+                Co-author Name<sup>1</sup>, 
+                Another Author<sup>2</sup>
+            </div>
+            <div class="affiliation">
+                <sup>1</sup>University/Institution Name, 
+                <sup>2</sup>Another Institution
+            </div>
+            <div class="nav-buttons">
+                <a href="#" class="btn">📄 Paper</a>
+                <a href="#" class="btn">💻 Code</a>
+                <a href="#" class="btn">🎥 Video</a>
+                <a href="#" class="btn">📊 Data</a>
+                <a href="#" class="btn">🖼️ Poster</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section id="abstract">
+                <h2>Abstract</h2>
+                <div class="abstract-box">
+                    <p>
+                        We present a novel approach for estimating 2D camera motion using hybrid motion basis. 
+                        Camera motion estimation is a fundamental problem in computer vision with applications 
+                        ranging from autonomous driving to augmented reality. Traditional methods often struggle 
+                        with complex motion patterns and varying scene conditions. Our hybrid motion basis framework 
+                        combines the strengths of both parametric and non-parametric motion models to achieve 
+                        robust and accurate camera motion estimation. We introduce a novel representation that 
+                        adaptively selects the most appropriate motion basis for different regions of the image, 
+                        leading to improved accuracy and robustness. Extensive experiments on standard benchmarks 
+                        demonstrate that our method outperforms state-of-the-art approaches while maintaining 
+                        computational efficiency.
+                    </p>
+                </div>
+            </section>
+
+            <section id="method">
+                <h2>Method Overview</h2>
+                <div class="method-overview">
+                    <p>Our hybrid motion basis framework consists of three main components:</p>
+                    <div class="method-diagram">
+                        Method Architecture Diagram
+                        <br>
+                        (Replace with actual diagram)
+                    </div>
+                    <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                        <li><strong>Motion Basis Selection:</strong> Adaptive selection between parametric and non-parametric motion models</li>
+                        <li><strong>Hybrid Estimation:</strong> Joint optimization framework for robust motion estimation</li>
+                        <li><strong>Uncertainty Quantification:</strong> Confidence-aware motion prediction</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="results">
+                <h2>Results</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Quantitative Results</h3>
+                        <div class="result-placeholder">
+                            Performance Comparison Table
+                        </div>
+                        <p>Our method achieves state-of-the-art performance on standard benchmarks.</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Qualitative Results</h3>
+                        <div class="result-placeholder">
+                            Visual Comparison Results
+                        </div>
+                        <p>Visual comparison showing improved motion estimation accuracy.</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Ablation Study</h3>
+                        <div class="result-placeholder">
+                            Ablation Study Results
+                        </div>
+                        <p>Analysis of individual component contributions to the overall performance.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="citation">
+                <h2>Citation</h2>
+                <div class="citation-box">
+@inproceedings{author2025estimating,
+    title={Estimating 2D Camera Motion with Hybrid Motion Basis},
+    author={Author, Name and Co-author, Name and Another, Author},
+    booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+    pages={xxxx--xxxx},
+    year={2025}
+}
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 - Estimating 2D Camera Motion with Hybrid Motion Basis</p>
+            <div class="social-links">
+                <a href="https://github.com/lhaippp/CamFlow">GitHub</a>
+                <a href="#">arXiv</a>
+                <a href="#">Project Page</a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
