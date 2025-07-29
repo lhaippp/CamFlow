@@ -4,224 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[ICCV25] Estimating 2D Camera Motion with Hybrid Motion Basis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fafafa;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .conference-tag {
-            background: rgba(255, 255, 255, 0.2);
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            line-height: 1.2;
-        }
-
-        .authors {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .affiliation {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-
-        .nav-buttons {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        main {
-            padding: 60px 0;
-        }
-
-        section {
-            margin-bottom: 60px;
-        }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            color: #2c3e50;
-            text-align: center;
-        }
-
-        .abstract-box {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-        }
-
-        .abstract-box p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            text-align: justify;
-        }
-
-        .method-overview {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .method-diagram {
-            width: 100%;
-            max-width: 800px;
-            height: 400px;
-            background: linear-gradient(45deg, #f0f2f5, #e1e8ed);
-            border-radius: 10px;
-            margin: 30px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #666;
-            border: 2px dashed #ccc;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .result-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-
-        .result-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #667eea;
-        }
-
-        .result-placeholder {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
-            border-radius: 8px;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6c757d;
-            border: 1px dashed #dee2e6;
-        }
-
-        .citation-box {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 40px 0;
-        }
-
-        .social-links {
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 1.1rem;
-        }
-
-        .social-links a:hover {
-            color: #667eea;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .nav-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 200px;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -326,6 +109,39 @@
 
             <section id="results">
                 <h2>Results</h2>
+                
+                <!-- Qualitative Results Section -->
+                <div class="qualitative-results">
+                    <h3 style="text-align: center; color: #667eea; margin-bottom: 30px;">Representative Qualitative Results</h3>
+                    <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem; color: #555;">
+                        Our method demonstrates superior performance across challenging scenarios including low-light and adverse weather conditions. 
+                        The following comparisons show CamFlow (ours) vs. state-of-the-art baselines.
+                    </p>
+                    
+                    <div class="results-comparison">
+                        <div class="comparison-item">
+                            <h4>Dark Environment</h4>
+                            <div class="gif-container">
+                                <img src="images/Dark_0121_comparison.gif" alt="Dark environment comparison" class="result-gif">
+                            </div>
+                            <p class="result-description">
+                                CamFlow maintains robust camera motion estimation even in challenging low-light conditions where traditional methods struggle.
+                            </p>
+                        </div>
+                        
+                        <div class="comparison-item">
+                            <h4>Rainy Weather</h4>
+                            <div class="gif-container">
+                                <img src="images/Rain_0175_comparison.gif" alt="Rainy weather comparison" class="result-gif">
+                            </div>
+                            <p class="result-description">
+                                Our hybrid motion basis approach effectively handles complex motion patterns in adverse weather conditions with rain and reduced visibility.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quantitative Results Grid -->
                 <div class="results-grid">
                     <div class="result-card">
                         <h3>Quantitative Results</h3>
@@ -333,13 +149,6 @@
                             Performance Comparison Table
                         </div>
                         <p>Our method achieves state-of-the-art performance on standard benchmarks.</p>
-                    </div>
-                    <div class="result-card">
-                        <h3>Qualitative Results</h3>
-                        <div class="result-placeholder">
-                            Visual Comparison Results
-                        </div>
-                        <p>Visual comparison showing improved motion estimation accuracy.</p>
                     </div>
                     <div class="result-card">
                         <h3>Ablation Study</h3>

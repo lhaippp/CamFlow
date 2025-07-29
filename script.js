@@ -293,4 +293,12 @@ document.addEventListener('DOMContentLoaded', function() {
         methodImg.title = 'Click to enlarge';
         methodImg.addEventListener('click', createImageModal);
     }
+
+    // Add click-to-enlarge for result GIFs
+    const resultGifs = document.querySelectorAll('.result-gif');
+    resultGifs.forEach(gif => {
+        gif.style.cursor = 'zoom-in';
+        gif.title = 'Click to enlarge';
+        gif.addEventListener('click', createImageModal);
+    });
 });
