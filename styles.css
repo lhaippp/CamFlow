@@ -40,15 +40,28 @@ header {
     text-align: center;
 }
 
-.conference-tag {
-    background: rgba(255, 255, 255, 0.2);
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 20px;
+.conference-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.conference-logo {
+    height: 80px;
+    width: auto;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px;
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.conference-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 h1 {
@@ -64,9 +77,21 @@ h1 {
     opacity: 0.9;
 }
 
+.authors sup {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
 .affiliation {
     font-size: 1rem;
     opacity: 0.8;
+    line-height: 1.5;
+}
+
+.affiliation small {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    font-style: italic;
 }
 
 /* Button Styles */
@@ -122,6 +147,82 @@ h2 {
     margin-bottom: 40px;
 }
 
+.content-box h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.content-box img {
+    transition: transform 0.3s ease;
+    border: 1px solid #e1e8ed;
+}
+
+.content-box img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+/* Motivation section styling */
+#motivation .content-box {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+#motivation h3 {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#motivation img {
+    max-width: 90%;
+    height: auto;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    cursor: zoom-in;
+}
+
+/* Key insight highlight box */
+.key-insight {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 10px;
+    color: white;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.key-insight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.key-insight h4 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+    #motivation img {
+        max-width: 100%;
+    }
+    
+    .method-figure img {
+        max-width: 100%;
+    }
+    
+    .figure-caption {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+}
+
 .abstract-box {
     background: var(--white);
     padding: 40px;
@@ -143,6 +244,43 @@ h2 {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-medium);
     text-align: center;
+}
+
+.method-figure {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.method-figure img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: zoom-in;
+    border: 1px solid #e1e8ed;
+}
+
+.method-figure img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.2) !important;
+}
+
+.figure-caption {
+    text-align: justify;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-top: 15px;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    color: #555;
+}
+
+.figure-caption strong {
+    color: var(--text-dark);
+}
+
+.figure-caption em {
+    font-style: italic;
+    color: var(--primary-color);
 }
 
 .method-diagram {
@@ -219,6 +357,14 @@ footer {
     padding: 40px 0;
 }
 
+footer img {
+    transition: opacity 0.3s ease;
+}
+
+footer img:hover {
+    opacity: 1 !important;
+}
+
 .social-links {
     margin-top: 20px;
 }
@@ -239,6 +385,15 @@ footer {
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;
+    }
+    
+    .conference-info {
+        margin-bottom: 25px;
+    }
+    
+    .conference-logo {
+        height: 60px;
+        padding: 8px;
     }
     
     .nav-buttons {

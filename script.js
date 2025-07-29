@@ -168,4 +168,129 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.boxShadow = 'none';
         });
     });
+
+    // Special animation for motivation and method images
+    const motivationImg = document.querySelector('#motivation img');
+    const methodImg = document.querySelector('#method .method-figure img');
+    
+    // Reusable function for creating image modal
+    function createImageModal(event) {
+        const sourceImg = event.target;
+        
+        // Create modal for better image viewing
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+            padding: 20px;
+            box-sizing: border-box;
+            backdrop-filter: blur(5px);
+        `;
+        
+        const modalImg = document.createElement('img');
+        modalImg.src = sourceImg.src;
+        modalImg.style.cssText = `
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            background: white;
+            border: 1px solid #e1e8ed;
+        `;
+        
+        const closeBtn = document.createElement('div');
+        closeBtn.innerHTML = '×';
+        closeBtn.style.cssText = `
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #333;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.9);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        `;
+        
+        // Add hover effect for close button
+        closeBtn.addEventListener('mouseenter', () => {
+            closeBtn.style.background = 'rgba(255, 255, 255, 1)';
+            closeBtn.style.transform = 'scale(1.1)';
+        });
+        
+        closeBtn.addEventListener('mouseleave', () => {
+            closeBtn.style.background = 'rgba(255, 255, 255, 0.9)';
+            closeBtn.style.transform = 'scale(1)';
+        });
+        
+        modal.appendChild(modalImg);
+        modal.appendChild(closeBtn);
+        document.body.appendChild(modal);
+        
+        // Add fade-in animation
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.style.transition = 'opacity 0.3s ease';
+            modal.style.opacity = '1';
+        }, 10);
+        
+        // Close on click
+        [modal, closeBtn].forEach(element => {
+            element.addEventListener('click', (e) => {
+                if (e.target === modal || e.target === closeBtn) {
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                        if (document.body.contains(modal)) {
+                            document.body.removeChild(modal);
+                        }
+                    }, 300);
+                }
+            });
+        });
+        
+        // Close on escape key
+        const escapeHandler = (e) => {
+            if (e.key === 'Escape') {
+                modal.style.opacity = '0';
+                setTimeout(() => {
+                    if (document.body.contains(modal)) {
+                        document.body.removeChild(modal);
+                    }
+                }, 300);
+                document.removeEventListener('keydown', escapeHandler);
+            }
+        };
+        document.addEventListener('keydown', escapeHandler);
+    }
+
+    // Apply modal functionality to images
+    if (motivationImg) {
+        motivationImg.style.cursor = 'zoom-in';
+        motivationImg.title = 'Click to enlarge';
+        motivationImg.addEventListener('click', createImageModal);
+    }
+
+    if (methodImg) {
+        methodImg.style.cursor = 'zoom-in';
+        methodImg.title = 'Click to enlarge';
+        methodImg.addEventListener('click', createImageModal);
+    }
 });

@@ -226,23 +226,34 @@
 <body>
     <header>
         <div class="container">
-            <div class="conference-tag">ICCV 2025</div>
+            <div class="conference-info">
+                <img src="images/iccv2025-logo.png" alt="ICCV 2025" class="conference-logo">
+            </div>
             <h1>Estimating 2D Camera Motion with Hybrid Motion Basis</h1>
             <div class="authors">
-                <strong>Author Name</strong><sup>1</sup>, 
-                Co-author Name<sup>1</sup>, 
-                Another Author<sup>2</sup>
+                <strong>Haipeng Li</strong><sup>1*</sup>, 
+                <strong>Tianhao Zhou</strong><sup>1*</sup>, 
+                Zhanglei Yang<sup>1</sup>, 
+                Yi Wu<sup>2</sup>, 
+                Yan Chen<sup>2</sup>, 
+                Zijing Mao<sup>2</sup>, 
+                Shen Cheng<sup>3</sup>, 
+                Bing Zeng<sup>1</sup>, 
+                Shuaicheng Liu<sup>1†</sup>
             </div>
             <div class="affiliation">
-                <sup>1</sup>University/Institution Name, 
-                <sup>2</sup>Another Institution
+                <sup>1</sup>University of Electronic Science and Technology of China, 
+                <sup>2</sup>Xiaomi Corporation, 
+                <sup>3</sup>Dexmal
+                <br>
+                <small><sup>*</sup>Equal contribution, <sup>†</sup>Corresponding author</small>
             </div>
             <div class="nav-buttons">
                 <a href="#" class="btn">📄 Paper</a>
-                <a href="#" class="btn">💻 Code</a>
+                <a href="https://github.com/lhaippp/CamFlow" class="btn">💻 Code</a>
+                <a href="#motivation" class="btn">💡 Motivation</a>
                 <a href="#" class="btn">🎥 Video</a>
-                <a href="#" class="btn">📊 Data</a>
-                <a href="#" class="btn">🖼️ Poster</a>
+                <a href="#" class="btn">� Data</a>
             </div>
         </div>
     </header>
@@ -253,33 +264,62 @@
                 <h2>Abstract</h2>
                 <div class="abstract-box">
                     <p>
-                        We present a novel approach for estimating 2D camera motion using hybrid motion basis. 
-                        Camera motion estimation is a fundamental problem in computer vision with applications 
-                        ranging from autonomous driving to augmented reality. Traditional methods often struggle 
-                        with complex motion patterns and varying scene conditions. Our hybrid motion basis framework 
-                        combines the strengths of both parametric and non-parametric motion models to achieve 
-                        robust and accurate camera motion estimation. We introduce a novel representation that 
-                        adaptively selects the most appropriate motion basis for different regions of the image, 
-                        leading to improved accuracy and robustness. Extensive experiments on standard benchmarks 
-                        demonstrate that our method outperforms state-of-the-art approaches while maintaining 
-                        computational efficiency.
+                        Estimating 2D camera motion is a fundamental computer vision task that models the projection of 3D camera movements onto the 2D image plane. 
+                        Current methods rely on either homography-based approaches, limited to planar scenes, or meshflow techniques that use grid-based local homographies but struggle with complex non-linear transformations. 
+                        <strong style="color: #667eea;">A key insight of our work is that combining flow fields from different homographies creates motion patterns that cannot be represented by any single homography.</strong>
+                        We introduce <strong>CamFlow</strong>, a novel framework that represents camera motion using hybrid motion bases: physical bases derived from camera geometry and stochastic bases for complex scenarios. 
+                        Our approach includes a hybrid probabilistic loss function based on the Laplace distribution that enhances training robustness. 
+                        For evaluation, we create a new benchmark by masking dynamic objects in existing optical flow datasets to isolate pure camera motion. 
+                        Experiments show CamFlow outperforms state-of-the-art methods across diverse scenarios, demonstrating superior robustness and generalization in zero-shot settings. 
+                        Code and datasets are available at our project page: <a href="https://lhaippp.github.io/CamFlow/" target="_blank" style="color: #667eea; text-decoration: none;">https://lhaippp.github.io/CamFlow/</a>.
                     </p>
+                </div>
+            </section>
+
+            <section id="motivation">
+                <h2>Motivation</h2>
+                <div class="content-box">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <img src="images/motivation-hd.png" alt="Non-linearity of flow addition" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    </div>
+                    <h3 style="color: #667eea; margin-bottom: 20px; text-align: center;">Non-linearity of Flow Addition</h3>
+                    <p style="text-align: justify; line-height: 1.8; font-size: 1.05rem;">
+                        <strong>Key Insight:</strong> Two homography matrices generate flow1 and flow2. Adding these flows (flow3) differs 
+                        from the flow derived by multiplying the original homography matrices (homo3). When sampling points from flow3 to solve for a 
+                        homography, we get inconsistent solutions, proving that <strong>combined flow fields cannot be represented by a single homography</strong>.
+                    </p>
+                    <p style="text-align: justify; line-height: 1.8; font-size: 1.05rem; margin-top: 20px;">
+                        This fundamental limitation of traditional homography-based methods motivates our <strong>hybrid motion basis approach</strong>, 
+                        which combines physical bases derived from camera geometry with stochastic bases to handle complex non-linear transformations 
+                        that cannot be captured by any single homography.
+                    </p>
+                    <div class="key-insight">
+                        <h4>
+                            💡 <em>More bases → Better camera motion representation</em>
+                        </h4>
+                    </div>
                 </div>
             </section>
 
             <section id="method">
                 <h2>Method Overview</h2>
                 <div class="method-overview">
-                    <p>Our hybrid motion basis framework consists of three main components:</p>
-                    <div class="method-diagram">
-                        Method Architecture Diagram
-                        <br>
-                        (Replace with actual diagram)
+                    <p>Based on the insight that <strong>combined flow fields cannot be represented by a single homography</strong>, 
+                    our <strong>CamFlow</strong> framework introduces hybrid motion bases for robust 2D camera motion estimation:</p>
+                    
+                    <div class="method-figure">
+                        <img src="images/method-framework.png" alt="CamFlow Method Framework" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin: 30px 0;">
+                        <div class="figure-caption">
+                            <strong>Figure:</strong> Our proposed motion estimation framework. Given image pair <em>(I<sub>a</sub>, I<sub>b</sub>)</em>, features are extracted through a multi-scale pyramid and processed by the motion estimation transformer (MET) to compute weights for physical (blue) and noisy (red) motion bases. These weights linearly combine predefined motion bases to generate flow maps for warping. A mask generator predicts uncertainty masks <strong>d<sub>ab</sub></strong> and <strong>d<sub>ba</sub></strong> to reject unreliable regions, enhancing estimation robustness.
+                        </div>
                     </div>
-                    <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
-                        <li><strong>Motion Basis Selection:</strong> Adaptive selection between parametric and non-parametric motion models</li>
-                        <li><strong>Hybrid Estimation:</strong> Joint optimization framework for robust motion estimation</li>
-                        <li><strong>Uncertainty Quantification:</strong> Confidence-aware motion prediction</li>
+                    
+                    <ul style="text-align: left; max-width: 700px; margin: 30px auto 0;">
+                        <li><strong>Physical Motion Bases:</strong> Derived from camera geometry principles for fundamental motion patterns</li>
+                        <li><strong>Stochastic Motion Bases:</strong> Learned representations for complex non-linear transformations that cannot be captured by single homographies</li>
+                        <li><strong>Motion Estimation Transformer (MET):</strong> Computes adaptive weights for combining different motion bases</li>
+                        <li><strong>Uncertainty Prediction:</strong> Mask generator rejects unreliable regions for enhanced robustness</li>
+                        <li><strong>Hybrid Probabilistic Loss:</strong> Laplace distribution-based loss function for enhanced training robustness</li>
                     </ul>
                 </div>
             </section>
@@ -314,9 +354,9 @@
             <section id="citation">
                 <h2>Citation</h2>
                 <div class="citation-box">
-@inproceedings{author2025estimating,
+@inproceedings{li2025estimating,
     title={Estimating 2D Camera Motion with Hybrid Motion Basis},
-    author={Author, Name and Co-author, Name and Another, Author},
+    author={Li, Haipeng and Zhou, Tianhao and Yang, Zhanglei and Wu, Yi and Chen, Yan and Mao, Zijing and Cheng, Shen and Zeng, Bing and Liu, Shuaicheng},
     booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
     pages={xxxx--xxxx},
     year={2025}
@@ -328,11 +368,14 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 - Estimating 2D Camera Motion with Hybrid Motion Basis</p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                <img src="images/iccv2025-logo.png" alt="ICCV 2025" style="height: 40px; opacity: 0.8; border-radius: 5px;">
+                <p style="margin: 0;">&copy; 2025 - Estimating 2D Camera Motion with Hybrid Motion Basis</p>
+            </div>
             <div class="social-links">
                 <a href="https://github.com/lhaippp/CamFlow">GitHub</a>
                 <a href="#">arXiv</a>
-                <a href="#">Project Page</a>
+                <a href="https://lhaippp.github.io/CamFlow/">Project Page</a>
             </div>
         </div>
     </footer>

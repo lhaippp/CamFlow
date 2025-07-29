@@ -3,25 +3,58 @@
   "conference": "ICCV 2025",
   "authors": [
     {
-      "name": "Author Name",
+      "name": "Haipeng Li",
       "affiliation": 1,
-      "email": "author@university.edu",
-      "website": "https://authorwebsite.com"
+      "email": "haipeng.li@uestc.edu.cn",
+      "isEqual": true
     },
     {
-      "name": "Co-author Name", 
+      "name": "Tianhao Zhou", 
       "affiliation": 1,
-      "email": "coauthor@university.edu"
+      "email": "tianhao.zhou@uestc.edu.cn",
+      "isEqual": true
     },
     {
-      "name": "Another Author",
+      "name": "Zhanglei Yang",
+      "affiliation": 1,
+      "email": "zhanglei.yang@uestc.edu.cn"
+    },
+    {
+      "name": "Yi Wu",
       "affiliation": 2,
-      "email": "another@institution.edu"
+      "email": "wuyi@xiaomi.com"
+    },
+    {
+      "name": "Yan Chen",
+      "affiliation": 2,
+      "email": "chenyan@xiaomi.com"
+    },
+    {
+      "name": "Zijing Mao",
+      "affiliation": 2,
+      "email": "maozijing@xiaomi.com"
+    },
+    {
+      "name": "Shen Cheng",
+      "affiliation": 3,
+      "email": "shen.cheng@dexmal.com"
+    },
+    {
+      "name": "Bing Zeng",
+      "affiliation": 1,
+      "email": "bing.zeng@uestc.edu.cn"
+    },
+    {
+      "name": "Shuaicheng Liu",
+      "affiliation": 1,
+      "email": "shuaicheng.liu@uestc.edu.cn",
+      "isCorresponding": true
     }
   ],
   "affiliations": [
-    "University/Institution Name",
-    "Another Institution"
+    "University of Electronic Science and Technology of China",
+    "Xiaomi Corporation",
+    "Dexmal"
   ],
   "links": {
     "paper": "#",
@@ -29,19 +62,23 @@
     "video": "#",
     "data": "#",
     "poster": "#",
-    "arxiv": "#"
+    "arxiv": "#",
+    "project": "https://lhaippp.github.io/CamFlow/"
   },
-  "abstract": "We present a novel approach for estimating 2D camera motion using hybrid motion basis. Camera motion estimation is a fundamental problem in computer vision with applications ranging from autonomous driving to augmented reality. Traditional methods often struggle with complex motion patterns and varying scene conditions. Our hybrid motion basis framework combines the strengths of both parametric and non-parametric motion models to achieve robust and accurate camera motion estimation. We introduce a novel representation that adaptively selects the most appropriate motion basis for different regions of the image, leading to improved accuracy and robustness. Extensive experiments on standard benchmarks demonstrate that our method outperforms state-of-the-art approaches while maintaining computational efficiency.",
+  "abstract": "Estimating 2D camera motion is a fundamental computer vision task that models the projection of 3D camera movements onto the 2D image plane. Current methods rely on either homography-based approaches, limited to planar scenes, or meshflow techniques that use grid-based local homographies but struggle with complex non-linear transformations. We introduce CamFlow, a novel framework that represents camera motion using hybrid motion bases: physical bases derived from camera geometry and stochastic bases for complex scenarios. Our approach includes a hybrid probabilistic loss function based on the Laplace distribution that enhances training robustness. For evaluation, we create a new benchmark by masking dynamic objects in existing optical flow datasets to isolate pure camera motion. Experiments show CamFlow outperforms state-of-the-art methods across diverse scenarios, demonstrating superior robustness and generalization in zero-shot settings. Code and datasets are available at our project page: https://lhaippp.github.io/CamFlow/.",
   "keywords": [
     "Camera Motion Estimation",
     "Computer Vision", 
     "Hybrid Motion Basis",
     "2D Motion Analysis",
-    "Robust Estimation"
+    "Optical Flow",
+    "Homography",
+    "Probabilistic Loss",
+    "Zero-shot Generalization"
   ],
   "citation": {
-    "bibtex": "@inproceedings{author2025estimating,\n    title={Estimating 2D Camera Motion with Hybrid Motion Basis},\n    author={Author, Name and Co-author, Name and Another, Author},\n    booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},\n    pages={xxxx--xxxx},\n    year={2025}\n}",
-    "apa": "Author, N., Co-author, N., & Another, A. (2025). Estimating 2D Camera Motion with Hybrid Motion Basis. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. xxxx-xxxx)."
+    "bibtex": "@inproceedings{li2025estimating,\n    title={Estimating 2D Camera Motion with Hybrid Motion Basis},\n    author={Li, Haipeng and Zhou, Tianhao and Yang, Zhanglei and Wu, Yi and Chen, Yan and Mao, Zijing and Cheng, Shen and Zeng, Bing and Liu, Shuaicheng},\n    booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},\n    pages={xxxx--xxxx},\n    year={2025}\n}",
+    "apa": "Li, H., Zhou, T., Yang, Z., Wu, Y., Chen, Y., Mao, Z., Cheng, S., Zeng, B., & Liu, S. (2025). Estimating 2D Camera Motion with Hybrid Motion Basis. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. xxxx-xxxx)."
   },
   "social": {
     "github": "https://github.com/lhaippp/CamFlow",
