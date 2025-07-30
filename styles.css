@@ -363,6 +363,25 @@ h2 {
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
+/* Method Comparison Grid */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* 2x2 Comparison Grid */
+.comparison-grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .comparison-item h4 {
     color: var(--primary-color);
     font-size: 1.3rem;
@@ -497,6 +516,11 @@ footer img:hover {
     
     .results-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .comparison-grid-2x2 {
+        grid-template-columns: 1fr;
+        gap: 25px;
     }
     
     .content-box,
